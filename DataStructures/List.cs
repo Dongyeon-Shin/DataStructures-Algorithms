@@ -11,6 +11,25 @@ namespace DataStructures
         private const int DefaultCapacity = 10;
         private T[] items;
         private int size;
+        public T this[int index]
+        {
+            get
+            {
+                if (index < 0 || index >= size)
+                {
+                    throw new IndexOutOfRangeException();
+                }
+                return items[index];
+            }
+            set
+            {
+                if (index < 0 || index >= size)
+                {
+                    throw new IndexOutOfRangeException();
+                }
+                items[index] = value;
+            }
+        }
         public void Add(T item)
         {
             if (size == items.Length)
