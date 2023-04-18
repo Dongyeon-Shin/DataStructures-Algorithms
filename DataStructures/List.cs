@@ -99,7 +99,8 @@ namespace DataStructures
         }
         private void Grow()
         {
-            int newCapacity = items.Length * 2;
+            int newCapacity = items.Length * 2; // 실제 C#의 List는 단순히 몇배 해주는 형태가 아니라 남은 메모리를 고려하는 등 굉장히 복잡하게 구현되어 있다.
+            // 그래서 실제 C#의 리스트를 생성해서 Capacity를 확인하면 0으로 나온다. 위의 defaultCapacity처럼 10이 아니다.
             T[] newItems = new T[newCapacity];
             Array.Copy(items, 0, newItems, 0, size);
             items = newItems;
