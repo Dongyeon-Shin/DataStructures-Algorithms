@@ -13,6 +13,11 @@ namespace DataStructures
         private int size;
         public int Count { get { return size; } }
         public int Capacity { get { return items.Length; } }
+        public List()
+        {
+            this.items = new T[DefaultCapacity];
+            this.size = 0;
+        }
         public T this[int index]
         {
             get
@@ -65,6 +70,32 @@ namespace DataStructures
         public int IndexOf(T item)
         {
             return Array.IndexOf(items, item, 0, size);
+        }
+        public T? Find(Predicate<T> match)
+        {
+            if (match == null)
+            {
+                throw new ArgumentNullException("match");
+            }
+            for (int i = 0; i < size; i++)
+            {
+                if (match(items[i]))
+                {
+                    return items[i];
+                }
+            }
+            return default(T?);
+        }
+        public int FindIndex(Predicate<T> match)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                if (match(items[i]))
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
         private void Grow()
         {
