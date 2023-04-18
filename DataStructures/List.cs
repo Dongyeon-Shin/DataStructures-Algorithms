@@ -11,6 +11,8 @@ namespace DataStructures
         private const int DefaultCapacity = 10;
         private T[] items;
         private int size;
+        public int Count { get { return size; } }
+        public int Capacity { get { return items.Length; } }
         public T this[int index]
         {
             get
