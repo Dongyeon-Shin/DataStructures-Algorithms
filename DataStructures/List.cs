@@ -131,6 +131,18 @@ namespace DataStructures
             }
             return -1;
         }
+        // 마찬가지로 FindIndex와 동일하지만 순서만 거꾸로인 함수
+        public int FindLastIndex(Predicate<T> match)
+        {
+            for (int i = size - 1; i >= 0; i--)
+            {
+                if (match(items[i]))
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
         private void Grow()
         {
             int newCapacity = items.Length * 2; // 실제 C#의 List는 단순히 몇배 해주는 형태가 아니라 남은 메모리를 고려하는 등 굉장히 복잡하게 구현되어 있다.
