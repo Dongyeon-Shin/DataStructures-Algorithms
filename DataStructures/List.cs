@@ -103,6 +103,23 @@ namespace DataStructures
             }
             return default(T?);
         }
+        // 배열의 뒤에서부터 조건과 일치하는지 확인하는 함수
+        public T? FindLast(Predicate<T> match)
+        {
+            if (match == null)
+            {
+                throw new ArgumentNullException("match");
+            }
+            // 단순히 Find의 검색 순서만 바꿔주면 된다.
+            for (int i = size - 1; i >= 0; i--)
+            {
+                if (match(items[i]))
+                {
+                    return items[i];
+                }
+            }
+            return default(T?);
+        }
         public int FindIndex(Predicate<T> match)
         {
             for (int i = 0; i < size; i++)
