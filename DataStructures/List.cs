@@ -62,6 +62,21 @@ namespace DataStructures
                 Add(item);
             }
         }
+        // Add와 RemoveAt에서 쓴 기능을 응용
+        public void Insert(int index, T item)
+        {
+            // 허용량 체크
+            if (size == items.Length)
+            {
+                Grow();
+            }
+            // RemoveAt에서 한것처럼 하지만 덮어씌우는 주체는 반대로
+            // 해당 인덱스 부터의 값들을 한칸씩 뒤로 민다.
+            Array.Copy(items, index, items, index + 1, size - index);
+            // 해당 인덱스의 값을 원하는 값으로 바꿔준다.
+            items[index] = item;
+            size++;
+        }
         public bool Remove(T item)
         {
             int index = IndexOf(item);
@@ -142,6 +157,24 @@ namespace DataStructures
                 }
             }
             return -1;
+        }
+        // 복사 대상인 배열과 그 배열의 어느 인덱스 부터 붙여넣을지 매개변수로 받아 그 조건대로 복사한다.
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            Array.Copy(items, 0, array, arrayIndex, size);
+        }
+        // 클래스의 배열 중 사용하고 있는 크기만큼의 배열을 생성해 값을 복사한다.
+        public T[] ToArray()
+        {
+            T[] array = new T[size];
+            CopyTo(array, 0);
+            return array;
+        }
+        public void Clear()
+        {
+            size = 0;
+            // 어차피 size 바깥의 값은 신경 쓸 필요 없다.
+            Array.Clear(items, 0, 1);
         }
         private void Grow()
         {
