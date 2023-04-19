@@ -68,7 +68,37 @@ namespace DataStructures
                 head = newNode;
                 tail = newNode;
             }
-            // 3. 갯수 늘리기
+            // 3. 개수 늘리기
+            count++;
+            return newNode;
+        }
+        public LinkedListNode<T> AddBefore(LinkedListNode<T> node, T value)
+        {
+            // 예외1 : 노드가 연결리스트에 포함된 노드가 아닌경우
+            if (node.list == this)
+            {
+                throw new InvalidOperationException();
+            }
+            // 예외2 : 노드가 null인 경우
+            if (node == null)
+            {
+                throw new ArgumentException(nameof(node));
+            }
+            // 1. 새로운 노드 만들기
+            LinkedListNode<T> newNode = new LinkedListNode<T>(this, value);
+            // 2. 연결구조 바꾸기
+            newNode.next = node;
+            newNode.prev = node.prev;
+            node.prev = newNode;
+            if (node.prev != null)
+            {
+                node.prev.next = newNode;
+            }
+            else
+            {
+                head = newNode;
+            }
+            // 3. 개수 증가
             count++;
             return newNode;
         }
@@ -103,7 +133,7 @@ namespace DataStructures
             {
                 node.next.prev = node.prev;
             }
-            // 2. 갯수 줄이기
+            // 2. 개수 줄이기
             count--;
         }
         public bool Remove(T value)
