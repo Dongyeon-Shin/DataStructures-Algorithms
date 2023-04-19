@@ -15,6 +15,8 @@ namespace DataStructures
         private int position = -1; // foreach문을 사용하기 위해 현재 읽고있는 인덱스를 나타내는 값
         // 0이 아니라 -1인 이유는 Reset 함수를 살펴보면 Sets the enumerator to its initial position,
         // which is before the first element in the collection. 라고 요구되어 있기 때문이다.
+        // -1 로 시작하는 이유는 그 어떤 인덱스도 가리키지 않고 있다는 상황을 표현하기 위해서다.
+        // ex) 무언가를 판정하는 함수에서 존재하지않을때 -1을 리턴하는 것과 같은 이치
         public int Count { get { return size; } }
         public int Capacity { get { return items.Length; } }
         public List()
