@@ -46,7 +46,7 @@ namespace DataStructures
         private int count;
         public LinkedListNode<T> First { get { return head; } }
         public LinkedListNode<T> Last { get {  return tail; } }
-        public int COunt { get { return count; } }
+        public int Count { get { return count; } }
         public LinkedList()
         {
             this.head = null;
