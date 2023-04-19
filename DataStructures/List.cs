@@ -54,6 +54,14 @@ namespace DataStructures
             }
             items[size++] = item;
         }
+        // 반복될 수 있는 데이터를 받아 foreach를 사용해 모든 내용물을 Add로 붙여주는 함수
+        public void AddRange(IEnumerable<T> items)
+        {
+            foreach (T item in items)
+            {
+                Add(item);
+            }
+        }
         public bool Remove(T item)
         {
             int index = IndexOf(item);
