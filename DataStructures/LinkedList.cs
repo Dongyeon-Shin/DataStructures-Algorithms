@@ -72,5 +72,69 @@ namespace DataStructures
             count++;
             return newNode;
         }
+        public void Remove(LinkedListNode<T> node)
+        {
+            // 예외1 : 노드가 연결리스트에 포함된 노드가 아닌경우
+            if (node.list == this)
+            {
+                throw new InvalidOperationException();
+            }
+            // 예외2 : 노드가 null인 경우
+            if (node == null)
+            {
+                throw new ArgumentException(nameof(node));
+            }
+            // 0. 지웠을 때 head나 tail이 변경되는 경우 적용
+            if (head == node)
+            {
+                head = node.next;
+            }
+            if (tail == node)
+            {
+                tail = node.prev;
+            }
+            // 1. 연결구조 바꾸기
+            if (node.prev != null)
+            {
+                node.prev.next = node.next;
+
+            }
+            if (node.next != null)
+            {
+                node.next.prev = node.prev;
+            }
+            // 2. 갯수 줄이기
+            count--;
+        }
+        public bool Remove(T value)
+        {
+            LinkedListNode<T> findNode = Find(value);
+            if (findNode != null)
+            {
+                Remove(findNode);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public LinkedListNode<T> Find(T value)
+        {
+            LinkedListNode<T> target = head;
+            EqualityComparer<T> comparer = EqualityComparer<T>.Default;
+            while (target != null)
+            {
+                if (comparer.Equals(value, target.Value))
+                {
+                    return target;
+                }
+                else
+                {
+                    target = target.next;
+                }
+            }
+            return null;
+        }
     }
 }
